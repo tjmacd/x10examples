@@ -6,11 +6,11 @@ public class BarrierEx1 {
 	public static def main(args:Rail[String]){
 		val clock = Clock.make();
 		for(i in 0 .. 3){
-			finish async clocked(clock){
+			async clocked(clock){
 				
-				Console.OUT.println("thread number " + i + " (before)");
-				Clock.advanceAll();
-				Console.OUT.println("thread number " + i + " (after)");
+				Console.OUT.println("activity " + i + " (before)");
+				clock.advance();
+				Console.OUT.println("activity " + i + " (after)");
 			}
 		}
 	}
