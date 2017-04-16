@@ -14,10 +14,16 @@
 import x10.util.Random;
 
 public class TicketSimulator {
-	public static def main(Rail[String]) {
-		val nAgents = 5;
-		val nSeats = 100;
-		val oversell = 0.1;
+	public static def main(argv:Rail[String]) {
+		if(argv.size != 3) {
+			Console.OUT.println("Usage: ticket-simulator [num_agents] "+
+					"[num_seats] [percent_allowed_oversell]");
+			return;
+		}
+		
+		val nAgents = Long.parseLong(argv(0));
+		val nSeats = Long.parseLong(argv(1));
+		val oversell = Double.parseDouble(argv(2)) / 100;
 		var available:Long = (nSeats + oversell*nSeats) as Long;
 
 		var ticketsSold:Long = 0;
@@ -52,7 +58,6 @@ public class TicketSimulator {
 				}
 			}
 		}
-		
 		
 		Console.OUT.printf("Summary: %d tickets sold\n", ticketsSold);
 	}

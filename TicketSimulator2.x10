@@ -31,18 +31,22 @@ public class TicketSimulator2 {
 					Console.OUT.printf("Ticket agent %d: Unsuccessful "+
 							"transaction\n", id);
 				}
-				System.sleep(100);
+				//System.sleep(100);
 			}
 		}
 	}
 	
-	public static def main(Rail[String]) {
-		val nAgents = 5;
-		val nSeats = 10;
-		val oversell = 0.1;
-		var available:Long = (nSeats + oversell*nSeats) as Long;
-
+	public static def main(argv:Rail[String]) {
+		if(argv.size != 3) {
+			Console.OUT.println("Usage: ticket-simulator [num_agents] "+
+			"[num_seats] [percent_allowed_oversell]");
+			return;
+		}
 		
+		val nAgents = Long.parseLong(argv(0));
+		val nSeats = Long.parseLong(argv(1));
+		val oversell = Double.parseDouble(argv(2)) / 100;
+		var available:Long = (nSeats + oversell*nSeats) as Long;
 		val ticketsSold = GlobalRef[Rail[Long]](new Rail[Long](1, 0));
 		
 		finish for (i in 0 .. (nAgents-1)) {
