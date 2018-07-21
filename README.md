@@ -1,2 +1,2 @@
 # x10 examples
-Code examples for the language X10
+Examples of concurrency in the language X10
